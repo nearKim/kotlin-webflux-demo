@@ -3,10 +3,7 @@ package com.example.webfluxdemo.config
 import com.example.webfluxdemo.exception.InputFailedException
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.reactive.function.server.RouterFunction
-import org.springframework.web.reactive.function.server.RouterFunctions
-import org.springframework.web.reactive.function.server.ServerRequest
-import org.springframework.web.reactive.function.server.ServerResponse
+import org.springframework.web.reactive.function.server.*
 import reactor.core.publisher.Mono
 import java.util.function.BiFunction
 
@@ -22,7 +19,10 @@ class RouterConfig(val requestHandler: RequestHandler) {
 
     private fun serverResponseRouterFunction(): RouterFunction<ServerResponse> {
         return RouterFunctions.route()
-                    .GET("square/{input}", requestHandler::squareHandler)
+                    .GET("square/{input}", RequestPredicates.path("*/1?") , requestHandler::squareHandler)
+                    .GET("square/{input}") {
+                        ServerResponse.badRequest().bodyValue("Only 10-19 allowed")
+                    }
                     .GET("table/{input}", requestHandler:: tableHandler)
                     .GET("table/{input}/stream", requestHandler:: tableStreamHandler)
                     .POST("multiply", requestHandler:: multiplyHandler)
