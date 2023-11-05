@@ -13,13 +13,20 @@ import java.util.function.BiFunction
 @Configuration
 class RouterConfig(val requestHandler: RequestHandler) {
     @Bean
-    fun serverResponseRouterFunction(): RouterFunction<ServerResponse> {
+    fun routerFunctions(): RouterFunction<ServerResponse> {
         return RouterFunctions.route()
-                    .GET("router/square/{input}", requestHandler::squareHandler)
-                    .GET("router/table/{input}", requestHandler:: tableHandler)
-                    .GET("router/table/{input}/stream", requestHandler:: tableStreamHandler)
-                    .POST("router/multiply", requestHandler:: multiplyHandler)
-                    .GET("router/square/{input}/validation", requestHandler::squareHandlerWithValidation)
+                .path("router", ::serverResponseRouterFunction)
+                .build()
+    }
+
+
+    private fun serverResponseRouterFunction(): RouterFunction<ServerResponse> {
+        return RouterFunctions.route()
+                    .GET("square/{input}", requestHandler::squareHandler)
+                    .GET("table/{input}", requestHandler:: tableHandler)
+                    .GET("table/{input}/stream", requestHandler:: tableStreamHandler)
+                    .POST("multiply", requestHandler:: multiplyHandler)
+                    .GET("square/{input}/validation", requestHandler::squareHandlerWithValidation)
                 .onError(InputFailedException::class.java, exceptionHandler())
                  .build()
 
