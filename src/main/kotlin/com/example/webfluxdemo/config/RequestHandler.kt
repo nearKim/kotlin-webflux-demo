@@ -2,6 +2,7 @@ package com.example.webfluxdemo.config
 
 import com.example.webfluxdemo.dto.MultiplyRequestDto
 import com.example.webfluxdemo.dto.Response
+import com.example.webfluxdemo.exception.InputFailedException
 import com.example.webfluxdemo.service.ReactiveMathService
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
@@ -36,5 +37,14 @@ class RequestHandler(val mathService: ReactiveMathService) {
         val responseMono = this.mathService.multiply(requestDto)
         return ServerResponse.ok()
                 .body(responseMono, Response::class.java)
+    }
+
+    fun squareHandlerWithValidation(request: ServerRequest): Mono<ServerResponse> {
+        val input = Integer.parseInt(request.pathVariable("input"));
+        if (input < 10 || input > 20) {
+            return Mono.error(InputFailedException(input))
+        }
+        val responseMono = mathService.findSquare(input)
+        return ServerResponse.ok().body(responseMono, Response::class.java)
     }
 }
