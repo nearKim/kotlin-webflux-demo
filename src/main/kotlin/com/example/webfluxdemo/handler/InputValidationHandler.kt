@@ -11,8 +11,8 @@ class InputValidationHandler {
     @ExceptionHandler(InputFailedException::class)
     fun handleInputFailedException(ex: InputFailedException): ResponseEntity<InputFailedValidationResponse> {
         val response = InputFailedValidationResponse(
-            errorCode = 400,
-            input = ex.getInput(),
+            errorCode = ex.errorCode,
+            input = ex.input,
             message = ex.message!!
         )
         return ResponseEntity.badRequest().body(response)
