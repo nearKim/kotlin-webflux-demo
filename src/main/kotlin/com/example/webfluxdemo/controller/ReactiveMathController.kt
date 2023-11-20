@@ -20,7 +20,7 @@ class ReactiveMathController(val mathService: ReactiveMathService) {
     @GetMapping("/table/{input}")
     fun multiplicationTable(@PathVariable input: Int): Flux<Response> = mathService.multiplicationTable(input)
 
-    @GetMapping("/table/{input}/streaming", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
+    @GetMapping("/table/{input}/stream", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
     fun multiplicationTableStream(@PathVariable input: Int): Flux<Response> = mathService.multiplicationTable(input)
 
     @PostMapping("/multiply")

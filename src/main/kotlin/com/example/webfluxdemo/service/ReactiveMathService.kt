@@ -17,8 +17,8 @@ class ReactiveMathService {
 
     fun multiplicationTable(number: Int): Flux<Response> {
         return Flux.range(1, 10)
-            .delayElements(Duration.ofSeconds(1))
-//            .doOnNext { SleepUtil.sleepSeconds(1) }
+//            .delayElements(Duration.ofSeconds(1))
+            .doOnNext { SleepUtil.sleepSeconds(1) }
             .doOnNext { println("MathService Processing...: $it") }
             .map { Response(output = it * number) }
     }
