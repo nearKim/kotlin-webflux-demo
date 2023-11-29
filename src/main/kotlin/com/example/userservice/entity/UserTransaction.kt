@@ -6,8 +6,8 @@ import java.time.LocalDateTime
 
 class UserTransaction {
     @Id
-    private var id: Int? = null
-    private var userId: Int? = null
-    private var amount: Int? = null
-    private var transactionDate: LocalDateTime? = null
+    val id: Int? = null
+    var userId: Int? = null
+    var amount: Int = 0
+    var transactionDate: LocalDateTime? = null
 }

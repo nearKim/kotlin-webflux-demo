@@ -1,3 +1,3 @@
 package com.example.userservice.dto
 
-data class TransactionRequestDto(val userID: Int, val amount: Int, val status: TransactionStatus)
+data class TransactionRequestDto(val userId: Int, val amount: Int, val status: TransactionStatus)
