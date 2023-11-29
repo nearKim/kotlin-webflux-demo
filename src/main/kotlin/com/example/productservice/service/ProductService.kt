@@ -15,6 +15,11 @@ class ProductService(val repository: ProductRepository) {
             .map(EntityDtoUtil::toDto)
     }
 
+    fun getProductByPriceRange(min: Int, max: Int): Flux<ProductDto> {
+        return repository.findByPriceBetween(min, max)
+            .map(EntityDtoUtil::toDto)
+    }
+
     fun getProductById(id: String): Mono<ProductDto> {
         return repository.findById(id)
             .map(EntityDtoUtil::toDto)

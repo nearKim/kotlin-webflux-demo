@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    implementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring31x:4.10.1")
+    implementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x:4.4.1")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

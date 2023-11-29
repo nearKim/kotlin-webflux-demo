@@ -17,6 +17,10 @@ class ProductController(val service: ProductService) {
         return service.getAll()
     }
 
+    @GetMapping("price-range")
+    fun getByPriceRange(@RequestParam("min") min: Int, @RequestParam("max") max: Int): Flux<ProductDto> {
+        return service.getProductByPriceRange(min, max)
+    }
     @GetMapping("{id}")
     fun getProductById(id: String): Mono<ResponseEntity<ProductDto>> {
         return service.getProductById(id)
