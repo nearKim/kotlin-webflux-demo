@@ -24,8 +24,8 @@ class ProductController(val service: ProductService) {
     @GetMapping("{id}")
     fun getProductById(id: String): Mono<ResponseEntity<ProductDto>> {
         return service.getProductById(id)
-                .map { ResponseEntity<ProductDto>(HttpStatusCode.valueOf(200)) }
-                .defaultIfEmpty(ResponseEntity.notFound().build())
+            .map { ResponseEntity<ProductDto>(HttpStatusCode.valueOf(200)) }
+            .defaultIfEmpty(ResponseEntity.notFound().build())
     }
 
     @PostMapping
@@ -36,13 +36,12 @@ class ProductController(val service: ProductService) {
     @PutMapping("{id}")
     fun updateProduct(@PathVariable id: String, @RequestBody productDtoMono: Mono<ProductDto>): Mono<ResponseEntity<ProductDto>> {
         return service.updateProduct(id, productDtoMono)
-                .map { ResponseEntity<ProductDto>(HttpStatusCode.valueOf(200)) }
-                .defaultIfEmpty(ResponseEntity.notFound().build())
+            .map { ResponseEntity<ProductDto>(HttpStatusCode.valueOf(200)) }
+            .defaultIfEmpty(ResponseEntity.notFound().build())
     }
 
     @DeleteMapping("{id}")
     fun deleteProduct(@PathVariable id: String): Mono<Void> {
         return service.deleteProduct(id)
     }
-
 }
